@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
 
 <GridPane fx:controller="sample.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center"
@@ -53,8 +54,8 @@
                    GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
 
-    <!-- Add Submit Button -->
-    <Button fx:id="submitButton" text="Submit"
+
+    <Button fx:id="submitButton" text="Enter"
             prefWidth="100" prefHeight="40" defaultButton="true"
             GridPane.columnIndex="0" GridPane.rowIndex="4"
             GridPane.columnSpan="2" GridPane.rowSpan="1"
@@ -64,4 +65,30 @@
             <Insets top="20" right="0" bottom="20" left="0"></Insets>
         </GridPane.margin>
     </Button>
+
+
+    <!-- Add Continue Button -->
+<Button fx:id="ContinueButton" text="Continue without logging in"
+        prefWidth="400" prefHeight="20" defaultButton="true"
+        GridPane.columnIndex="0" GridPane.rowIndex="4"
+        GridPane.columnSpan="2" GridPane.rowSpan="1"
+        GridPane.halignment="CENTER"
+        onAction="#handleContinue">
+    <GridPane.margin>
+    <Insets top="100" right="0" bottom="20" left="0"></Insets>
+</GridPane.margin>
+</Button>
+
+    <Button fx:id="ForgetButton" text="Forgot your usernname/password"
+            prefWidth="600" prefHeight="20" defaultButton="true"
+            GridPane.columnIndex="0" GridPane.rowIndex="4"
+            GridPane.columnSpan="2" GridPane.rowSpan="1"
+            GridPane.halignment="CENTER"
+            onAction="#handleforget">
+        <GridPane.margin>
+            <Insets top="170" right="0" bottom="20" left="0"></Insets>
+        </GridPane.margin>
+    </Button>
+
+
 </GridPane>
