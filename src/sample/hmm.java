@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,10 +17,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class hmm extends Application {
     private Stage stage;
+    Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -58,7 +61,7 @@ public class hmm extends Application {
             }
         });
         root.getChildren().addAll(login,Username,password, userLabel, label);
-        return new Scene(root, 1000, 875);
+        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
     }
 
     protected Scene CreateAccountScene(String name) {
@@ -73,7 +76,7 @@ public class hmm extends Application {
 
         Image imageDecline = new Image(getClass().getResourceAsStream("plus-flat.png"));
         Button AddButton = new Button("Add Signs");
-        AddButton.setGraphic(new ImageView(imageDecline));
+        //AddButton.setGraphic(new ImageView(imageDecline));
         AddButton.setTranslateY(100);
         AddButton.setTranslateX(-100);
         AddButton.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
@@ -97,8 +100,8 @@ public class hmm extends Application {
 
             }
         });
-        root.getChildren().addAll(InventoryButton, welcome,AddButton,ReportButton,ReserveButton,ComplainButton);
-        return new Scene(root, 1000, 875);
+        root.getChildren().addAll(InventoryButton, welcome, AddButton, ReportButton, ReserveButton, ComplainButton);
+        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
     }
 
     public static void main(String[] args) {
