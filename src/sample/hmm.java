@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 public class hmm extends Application {
     private Stage stage;
     Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+    Button_Action but = new Button_Action();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -66,6 +67,7 @@ public class hmm extends Application {
 
     protected Scene CreateAccountScene(String name) {
         VBox root = new VBox();
+        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
         root.setAlignment(Pos.CENTER);
         Label welcome = new Label("Welcome " + name + "! What would you like to do today?");
         welcome.setFont(new Font("Arial", 30));
@@ -98,8 +100,39 @@ public class hmm extends Application {
         InventoryButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
 
+                but.InventoryAction(stage);
             }
         });
+
+        AddButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                but.AddAction(stage);
+            }
+        });
+
+        ReserveButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                 but.ReserveAction(stage);
+            }
+        });
+
+        ComplainButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                but.RecommendationAction(stage);
+            }
+        });
+
+        ReportButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                but.ReportAction(stage);
+            }
+        });
+
         root.getChildren().addAll(InventoryButton, welcome, AddButton, ReportButton, ReserveButton, ComplainButton);
         return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
     }
