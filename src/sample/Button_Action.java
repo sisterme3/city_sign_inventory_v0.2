@@ -2,8 +2,7 @@ package sample;
 
 import javafx.stage.Stage;
 
-public class Button_Action extends Database_test {
-
+public class Button_Action extends Scene_changer{
 
 
     public void AddAction(Stage s){
@@ -27,7 +26,12 @@ public class Button_Action extends Database_test {
     }
 
     public void InventoryAction(Stage s){
-        Database_test.signTest();
+     s.setScene(InventoryScene());
+    }
+
+    public void BackAction(Stage s){
+        //s.setScene(s.setScene();)
+
     }
 
 

@@ -1,4 +1,4 @@
-package sample;
+package sample.Old_stuff;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
 import javafx.stage.Stage;
+import sample.AlertHelper;
 
 public class Controller {
     @FXML
