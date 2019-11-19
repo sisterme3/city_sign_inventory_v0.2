@@ -6,22 +6,22 @@ public class Button_Action extends Scene_changer{
 
 
     public void AddAction(Stage s){
-
+        s.setScene(AddScene());
 
     }
 
     public void ReserveAction(Stage s){
-
+        s.setScene(ReserveScene());
 
     }
 
     public void ReportAction(Stage s){
-
+        s.setScene(ReportScene());
 
     }
 
     public void RecommendationAction(Stage s){
-
+     s.setScene(RecommendationScene());
 
     }
 
