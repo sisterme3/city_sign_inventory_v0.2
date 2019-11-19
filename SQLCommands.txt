@@ -1,0 +1,58 @@
+Sql Commands
+
+Add Customer
+#don’t change this V
+Insert INTO customers( name)
+#change this V
+Values ('Test Customer')
+
+Remove Customer
+
+delete from customers where name like ‘nameofcustomer%’
+
+
+Edit Customer
+
+update customers set name ="nameyouwant" where name like ('Test%')
+
+
+Add sign
+
+#don’t change this V
+Insert INTO signs( number, description, categoryID, length, width, text, languageid, instock, price)
+#change this V
+Values (123, 'Test sign name', 2, 21, 21, 'blah blah blah im a sign', 2, 2, 1)
+
+
+Remove sign
+
+delete from signs where id = idofsign
+
+
+Edit sign
+
+update signs set thingyouwannachange =“thingyouwant" where id=idofsign
+
+
+Add reservation
+
+Insert INTO reservations(customer, sign, amount,requestedon, status, lastactivity)
+Values (13, SomeSignID,Amountofsigns, CURRENT_TIMESTAMP,2,CURRENT_TIMESTAMP)
+
+
+Remove reservation
+
+update reservations set status =5 where name like (‘targetname%’)
+
+Or by id then
+
+update reservations set status =5 where id = ReservationID
+
+
+Edit reservation
+
+update reservations set status =statusnumber where id = reservationid
+
+update reservations set lastactivity =(CURRENT_TIMESTAMP))
+where id = reservationid
+
