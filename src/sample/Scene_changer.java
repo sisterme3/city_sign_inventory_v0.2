@@ -77,9 +77,29 @@ public class Scene_changer extends Database_Access {
 
         Label userLabel = new Label(sign());
         userLabel.setFont(new Font("Arial", 15));
+
         Button BackButton = new Button("Back to Main Menu");
         BackButton.setTranslateY(100);
         BackButton.setTranslateX(-100);
+
+        Label Reasonlabel = new Label("Please enter your reason for changing inventory below");
+        Reasonlabel.setFont(new Font("Arial", 15));
+        Reasonlabel.setTranslateY(-70);
+
+        TextField Reasonbox = new TextField();
+        Reasonbox.prefWidth(100);
+
+        Button ReasonButton = new Button("Submit Reason");
+        ReasonButton.setTranslateY(100);
+        ReasonButton.setTranslateX(100);
+
+
+        ReasonButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+                  String Reason = Reasonbox.getText();
+                  Reasonbox.setText("");
+            }
+        });
 
 
         BackButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -88,11 +108,7 @@ public class Scene_changer extends Database_Access {
                 stage.setScene(MenuScene(getname()));
             }
         });
-
-
-
-
-        root.getChildren().addAll(userLabel,BackButton);
+        root.getChildren().addAll(userLabel,BackButton, Reasonbox, Reasonlabel, ReasonButton);
         return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
     }
 
@@ -207,7 +223,7 @@ public class Scene_changer extends Database_Access {
         VBox root = new VBox();
         root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
         root.setAlignment(Pos.CENTER);
-        Label welcome = new Label("Welcome"+ name +"What would you like to do today?");
+        Label welcome = new Label("Welcome "+ name + "!" +" What would you like to do today?");
         welcome.setFont(new Font("Arial", 30));
         welcome.setTranslateY(-300);
         Button InventoryButton = new Button("See Inventory");

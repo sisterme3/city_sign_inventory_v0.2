@@ -22,8 +22,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     private static Stage stage;
-    Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-   // Button_Action but = new Button_Action();
 
 
     @Override
