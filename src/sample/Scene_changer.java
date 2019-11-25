@@ -6,14 +6,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
@@ -38,7 +32,7 @@ public class Scene_changer extends Database_Access {
 
     public Scene logInScene() {
         VBox root = new VBox();
-        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        root.setBackground(new Background(new BackgroundFill(Color.SLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
         root.setPadding(new Insets(10, 0, 0, 10));
         root.setSpacing(10);
         root.setAlignment(Pos.CENTER);
@@ -48,12 +42,31 @@ public class Scene_changer extends Database_Access {
         Label label = new Label("Please login below!!!");
         label.setFont(new Font("Arial", 30));
         label.setTranslateY(-200);
-
         label.setAlignment(Pos.CENTER);
         TextField Username = new TextField();
-        Username.prefWidth(100);
+        Username.prefWidth(5);
         setname(Username.getText());
         PasswordField password = new PasswordField();
+        GridPane root1 = new GridPane();
+        root1.addRow(0, Username);
+        root1.addRow(1, password);
+        root1.setAlignment(Pos.BASELINE_LEFT);
+        root1.setPadding(new Insets(10, 20, 20, 10));
+        root1.setAlignment(Pos.CENTER);
+
+        Button AdminButton = new Button("Are you an Admin? Click here!!");
+        AdminButton.setTranslateY(100);
+        AdminButton.setTranslateX(-400);
+
+
+        AdminButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+
+                stage.setScene(AdminScene());
+            }
+        });
+
+
 
         Button login = new Button("Enter");
         login.setTranslateY(140);
@@ -63,12 +76,37 @@ public class Scene_changer extends Database_Access {
                  stage.setScene(MenuScene(name));
             }
         });
-        root.getChildren().addAll(login,Username,password, userLabel, label);
+        root.getChildren().addAll(login,Username,password, userLabel, label, AdminButton);
         return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
     }
 
     protected Scene InventoryScene() {
-        VBox root = new VBox();
+        Menu menu1 = new Menu("Actions");
+        Menu menu2 = new Menu("Account Settings");
+        MenuItem me1 = new MenuItem("Change Password");
+        MenuItem me2 = new MenuItem("Change Account Settings");
+        MenuItem me3 = new MenuItem("Log out");
+        MenuItem m1 = new MenuItem("See Inventory");
+        MenuItem m2 = new MenuItem("Add Signs");
+        MenuItem m3 = new MenuItem("Reserve Signs");
+        MenuItem m4 = new MenuItem("Recommendation");
+        MenuItem m5 = new MenuItem("Report a Problem");
+        menu2.getItems().add(me1);
+        menu2.getItems().add(me2);
+        menu2.getItems().add(me3);
+        menu1.getItems().add(m1);
+        menu1.getItems().add(m2);
+        menu1.getItems().add(m3);
+        menu1.getItems().add(m4);
+        menu1.getItems().add(m5);
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(menu1);
+        menuBar.getMenus().add(menu2);
+        menuBar.setTranslateY(-375);
+        menuBar.setTranslateX(-5);
+        menuBar.autosize();
+
+        VBox root = new VBox(menuBar);
         root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(10, 0, 0, 10));
@@ -77,165 +115,8 @@ public class Scene_changer extends Database_Access {
 
         Label userLabel = new Label(sign());
         userLabel.setFont(new Font("Arial", 15));
-        Button BackButton = new Button("Back to Main Menu");
-        BackButton.setTranslateY(100);
-        BackButton.setTranslateX(-100);
 
-
-        BackButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-
-                stage.setScene(MenuScene(getname()));
-            }
-        });
-
-
-
-
-        root.getChildren().addAll(userLabel,BackButton);
-        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
-    }
-
-    protected Scene RecommendationScene() {
-        VBox root = new VBox();
-        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-        root.setAlignment(Pos.CENTER);
-        root.setPadding(new Insets(10, 0, 0, 10));
-        root.setSpacing(10);
-        root.setAlignment(Pos.CENTER);
-
-        Label userLabel = new Label("Hello");
-        userLabel.setFont(new Font("Arial", 15));
-
-        Button BackButton = new Button("Back to Main Menu");
-        BackButton.setTranslateY(100);
-        BackButton.setTranslateX(-100);
-
-
-        BackButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-
-                stage.setScene(MenuScene(getname()));
-            }
-        });
-
-
-
-        root.getChildren().addAll(userLabel,BackButton);
-        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
-    }
-
-    protected Scene ReportScene() {
-        VBox root = new VBox();
-        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-        root.setAlignment(Pos.CENTER);
-        root.setPadding(new Insets(10, 0, 0, 10));
-        root.setSpacing(10);
-        root.setAlignment(Pos.CENTER);
-
-        Label userLabel = new Label("Hello");
-        userLabel.setFont(new Font("Arial", 15));
-        Button BackButton = new Button("Back to Main Menu");
-        BackButton.setTranslateY(100);
-        BackButton.setTranslateX(-100);
-
-
-        BackButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-
-                stage.setScene(MenuScene(getname()));
-            }
-        });
-
-
-
-        root.getChildren().addAll(userLabel,BackButton);
-        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
-    }
-
-    protected Scene ReserveScene() {
-        VBox root = new VBox();
-        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-        root.setAlignment(Pos.CENTER);
-        root.setPadding(new Insets(10, 0, 0, 10));
-        root.setSpacing(10);
-        root.setAlignment(Pos.CENTER);
-
-        Label userLabel = new Label("Hello");
-        userLabel.setFont(new Font("Arial", 15));
-        Button BackButton = new Button("Back to Main Menu");
-        BackButton.setTranslateY(100);
-        BackButton.setTranslateX(-100);
-
-
-        BackButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-
-                stage.setScene(MenuScene(getname()));
-            }
-        });
-
-        root.getChildren().addAll(userLabel,BackButton);
-        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
-    }
-    protected Scene AddScene() {
-        VBox root = new VBox();
-        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-        root.setAlignment(Pos.CENTER);
-        root.setPadding(new Insets(10, 0, 0, 10));
-        root.setSpacing(10);
-        root.setAlignment(Pos.CENTER);
-        Label userLabel = new Label("Hello");
-        userLabel.setFont(new Font("Arial", 15));
-        Button BackButton = new Button("Back to Main Menu");
-        BackButton.setTranslateY(100);
-        BackButton.setTranslateX(-100);
-
-
-        BackButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-
-                stage.setScene(MenuScene(getname()));
-            }
-        });
-
-        root.getChildren().addAll(userLabel,BackButton);
-        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
-    }
-
-    protected Scene MenuScene(String name) {
-        VBox root = new VBox();
-        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-        root.setAlignment(Pos.CENTER);
-        Label welcome = new Label("Welcome"+ name + "!" +"What would you like to do today?");
-        welcome.setFont(new Font("Arial", 30));
-        welcome.setTranslateY(-300);
-        Button InventoryButton = new Button("See Inventory");
-        InventoryButton.setTranslateY(100);
-        InventoryButton.setTranslateX(-300);
-
-        //  Image imageDecline = new Image(getClass().getResourceAsStream("plus-flat.png"));
-        Button AddButton = new Button("Add Signs");
-        //AddButton.setGraphic(new ImageView(imageDecline));
-        AddButton.setTranslateY(100);
-        AddButton.setTranslateX(-100);
-        AddButton.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
-
-
-        Button ReserveButton = new Button("Reserve Signs");
-        ReserveButton.setTranslateY(100);
-        ReserveButton.setTranslateX(-100);
-
-        Button ComplainButton = new Button("Recommendation");
-        ComplainButton.setTranslateY(100);
-        ComplainButton.setTranslateX(0);
-
-        Button ReportButton = new Button("Report a Problem");
-        ReportButton.setTranslateY(100);
-        ReportButton.setTranslateX(100);
-
-
-        InventoryButton.setOnAction(new EventHandler<ActionEvent>() {
+        m1.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
 
                 stage.setScene(InventoryScene());
@@ -243,7 +124,7 @@ public class Scene_changer extends Database_Access {
             }
         });
 
-        AddButton.setOnAction(new EventHandler<ActionEvent>() {
+        m2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
 
@@ -251,28 +132,517 @@ public class Scene_changer extends Database_Access {
             }
         });
 
-        ReserveButton.setOnAction(new EventHandler<ActionEvent>() {
+        m3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 stage.setScene(ReserveScene());
             }
         });
 
-        ComplainButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                stage.setScene(RecommendationScene());
-            }
-        });
-
-        ReportButton.setOnAction(new EventHandler<ActionEvent>() {
+        m5.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 stage.setScene(ReportScene());
             }
         });
 
-        root.getChildren().addAll(InventoryButton, welcome, AddButton, ReportButton, ReserveButton, ComplainButton);
+        me1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+
+        root.getChildren().addAll(userLabel);
+        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+    }
+
+
+    protected Scene ReportScene() {
+        Menu menu1 = new Menu("Actions");
+        Menu menu2 = new Menu("Account Settings");
+        MenuItem me1 = new MenuItem("Change Password");
+        MenuItem me2 = new MenuItem("Change Account Settings");
+        MenuItem me3 = new MenuItem("Log out");
+        MenuItem m1 = new MenuItem("See Inventory");
+        MenuItem m2 = new MenuItem("Add Signs");
+        MenuItem m3 = new MenuItem("Reserve Signs");
+        MenuItem m5 = new MenuItem("Report a Problem");
+        menu2.getItems().add(me1);
+        menu2.getItems().add(me2);
+        menu2.getItems().add(me3);
+        menu1.getItems().add(m1);
+        menu1.getItems().add(m2);
+        menu1.getItems().add(m3);
+        menu1.getItems().add(m5);
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(menu1);
+        menuBar.getMenus().add(menu2);
+        menuBar.setTranslateY(-375);
+        menuBar.setTranslateX(-5);
+        menuBar.autosize();
+
+        VBox root = new VBox(menuBar);
+        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(10, 0, 0, 10));
+        root.setSpacing(10);
+        root.setAlignment(Pos.CENTER);
+
+        Label userLabel = new Label("Hello");
+        userLabel.setFont(new Font("Arial", 15));
+
+        m1.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+
+                stage.setScene(InventoryScene());
+
+            }
+        });
+
+        m2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                stage.setScene(AddScene());
+            }
+        });
+
+        m3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(ReserveScene());
+            }
+        });
+
+        m5.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(ReportScene());
+            }
+        });
+
+        me1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        root.getChildren().addAll(userLabel);
+        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+    }
+
+
+    protected Scene EditScene() {
+        Menu menu1 = new Menu("Actions");
+        Menu menu2 = new Menu("Account Settings");
+        MenuItem me1 = new MenuItem("Change Password");
+        MenuItem me2 = new MenuItem("Change Account Settings");
+        MenuItem me3 = new MenuItem("Log out");
+        MenuItem m1 = new MenuItem("See Inventory");
+        MenuItem m2 = new MenuItem("Add Signs");
+        MenuItem m3 = new MenuItem("Reserve Signs");
+        MenuItem m5 = new MenuItem("Report a Problem");
+        menu2.getItems().add(me1);
+        menu2.getItems().add(me2);
+        menu2.getItems().add(me3);
+        menu1.getItems().add(m1);
+        menu1.getItems().add(m2);
+        menu1.getItems().add(m3);
+        menu1.getItems().add(m5);
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(menu1);
+        menuBar.getMenus().add(menu2);
+        menuBar.setTranslateY(-375);
+        menuBar.setTranslateX(-5);
+        menuBar.autosize();
+
+        VBox root = new VBox(menuBar);
+        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(10, 0, 0, 10));
+        root.setSpacing(10);
+        root.setAlignment(Pos.CENTER);
+
+        Label userLabel = new Label("What Reservation would you like to edit?");
+        userLabel.setFont(new Font("Arial", 15));
+
+
+        m1.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+
+                stage.setScene(InventoryScene());
+
+            }
+        });
+
+        m2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                stage.setScene(AddScene());
+            }
+        });
+
+        m3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(ReserveScene());
+            }
+        });
+
+        m5.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(ReportScene());
+            }
+        });
+
+        me1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        root.getChildren().addAll(userLabel);
+        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+    }
+
+    protected Scene ReserveScene() {
+        Menu menu1 = new Menu("Actions");
+        Menu menu2 = new Menu("Account Settings");
+        MenuItem me1 = new MenuItem("Change Password");
+        MenuItem me2 = new MenuItem("Change Account Settings");
+        MenuItem me3 = new MenuItem("Log out");
+        MenuItem m1 = new MenuItem("See Inventory");
+        MenuItem m2 = new MenuItem("Add Signs");
+        MenuItem m3 = new MenuItem("Reserve Signs");
+        MenuItem m5 = new MenuItem("Report a Problem");
+        menu2.getItems().add(me1);
+        menu2.getItems().add(me2);
+        menu2.getItems().add(me3);
+        menu1.getItems().add(m1);
+        menu1.getItems().add(m2);
+        menu1.getItems().add(m3);
+        menu1.getItems().add(m5);
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(menu1);
+        menuBar.getMenus().add(menu2);
+        menuBar.setTranslateY(-355);
+        menuBar.setTranslateX(-5);
+        menuBar.autosize();
+
+        VBox root = new VBox(menuBar);
+        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(10, 0, 0, 10));
+        root.setSpacing(10);
+        root.setAlignment(Pos.CENTER);
+
+        Label userLabel = new Label("Hello");
+        userLabel.setFont(new Font("Arial", 15));
+
+        Button EditButton = new Button("Edit Previous Reservation");
+        EditButton.setTranslateY(100);
+        EditButton.setTranslateX(-200);
+
+
+        EditButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+
+                stage.setScene(EditScene());
+            }
+        });
+
+
+        m1.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+
+                stage.setScene(InventoryScene());
+
+            }
+        });
+
+        m2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                stage.setScene(AddScene());
+            }
+        });
+
+        m3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(ReserveScene());
+            }
+        });
+
+
+        m5.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(ReportScene());
+            }
+        });
+
+        me1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        root.getChildren().addAll(userLabel,EditButton);
+        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+    }
+    protected Scene AddScene() {
+        Menu menu1 = new Menu("Actions");
+        Menu menu2 = new Menu("Account Settings");
+        MenuItem me1 = new MenuItem("Change Password");
+        MenuItem me2 = new MenuItem("Change Account Settings");
+        MenuItem me3 = new MenuItem("Log out");
+        MenuItem m1 = new MenuItem("See Inventory");
+        MenuItem m2 = new MenuItem("Add Signs");
+        MenuItem m3 = new MenuItem("Reserve Signs");
+        MenuItem m5 = new MenuItem("Report a Problem");
+        menu2.getItems().add(me1);
+        menu2.getItems().add(me2);
+        menu2.getItems().add(me3);
+        menu1.getItems().add(m1);
+        menu1.getItems().add(m2);
+        menu1.getItems().add(m3);
+        menu1.getItems().add(m5);
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(menu1);
+        menuBar.getMenus().add(menu2);
+        menuBar.setTranslateY(-375);
+        menuBar.setTranslateX(0);
+        menuBar.autosize();
+
+        VBox root = new VBox(menuBar);
+        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(10, 0, 0, 10));
+        root.setSpacing(10);
+        root.setAlignment(Pos.CENTER);
+        Label userLabel = new Label("Hello");
+        userLabel.setFont(new Font("Arial", 15));
+
+
+        m1.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+
+                stage.setScene(InventoryScene());
+
+            }
+        });
+
+        m2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                stage.setScene(AddScene());
+            }
+        });
+
+        m3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(ReserveScene());
+            }
+        });
+
+
+        m5.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(ReportScene());
+            }
+        });
+
+        me1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+
+        root.getChildren().addAll(userLabel);
+        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+    }
+
+    protected Scene AdminScene() {
+        VBox root = new VBox();
+        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(10, 0, 0, 10));
+        root.setSpacing(10);
+        root.setAlignment(Pos.CENTER);
+        Label userLabel = new Label("Heyyyy Mister/Madam Admin <3");
+        userLabel.setFont(new Font("Arial", 15));
+
+        root.getChildren().addAll(userLabel);
+        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+    }
+
+    protected Scene MenuScene(String name) {
+        Menu menu1 = new Menu("Actions");
+        Menu menu2 = new Menu("Account Settings");
+        MenuItem me1 = new MenuItem("Change Password");
+        MenuItem me2 = new MenuItem("Change Account Settings");
+        MenuItem me3 = new MenuItem("Log out");
+        MenuItem m1 = new MenuItem("See Inventory");
+        MenuItem m2 = new MenuItem("Add Signs");
+        MenuItem m3 = new MenuItem("Reserve Signs");
+        MenuItem m5 = new MenuItem("Report a Problem");
+        menu2.getItems().add(me1);
+        menu2.getItems().add(me2);
+        menu2.getItems().add(me3);
+        menu1.getItems().add(m1);
+        menu1.getItems().add(m2);
+        menu1.getItems().add(m3);
+        menu1.getItems().add(m5);
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(menu1);
+        menuBar.getMenus().add(menu2);
+        menuBar.setTranslateY(-365);
+        menuBar.autosize();
+
+        VBox root = new VBox(menuBar);
+        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        root.setAlignment(Pos.CENTER);
+        Label welcome = new Label("Welcome"+ name + "!" +" What would you like to do today?");
+        welcome.setFont(new Font("Arial", 30));
+        welcome.setTranslateY(-350);
+
+        m1.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+
+                stage.setScene(InventoryScene());
+
+            }
+        });
+
+        m2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                stage.setScene(AddScene());
+            }
+        });
+
+        m3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(ReserveScene());
+            }
+        });
+
+        m5.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(ReportScene());
+            }
+        });
+
+        me1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+
+        root.getChildren().addAll(welcome);
         return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
     }
 

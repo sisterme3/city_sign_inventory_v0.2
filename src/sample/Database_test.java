@@ -140,6 +140,29 @@ public class Database_test {
         }
         return true;
     }
+
+    public static boolean UsersTest() {
+        String infop=" ";
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://cleanearthsoftware.com:3306/4236paulgarlandclean_cims1",
+                    "cims_user1",
+                    "CSC4610-01");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from Users");
+            while (rs.next())
+                infop = rs.getInt(1) + "  ";
+            con.close();
+            if (infop.isBlank()){
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return true;
+    }
     // MichaelM; not quite sure where to put this shit
     public static void addToDataBase() {
         Connection conn = null;
