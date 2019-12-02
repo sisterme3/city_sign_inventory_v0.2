@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 
 public class Database_test {
+    /**
+     *
+     * @return
+     */
     public static boolean signTest() {
         String infop=" ";
         try {
@@ -28,7 +32,10 @@ public class Database_test {
         return true;
     }
 
-
+    /**
+     *
+     * @return
+     */
     public static boolean customerTest() {
         String infop=" ";
         try {
@@ -51,6 +58,12 @@ public class Database_test {
         }
         return true;
     }
+
+
+    /**
+     *
+     * @return
+     */
     public static boolean categoriesTest() {
         String infop=" ";
         try {
@@ -73,6 +86,11 @@ public class Database_test {
         }
         return true;
     }
+
+    /**
+     *
+     * @return
+     */
     public static boolean languagesTest() {
         String infop=" ";
         try {
@@ -95,6 +113,11 @@ public class Database_test {
         }
         return true;
     }
+
+    /**
+     *
+     * @return
+     */
     public static boolean statusesTest() {
         String infop=" ";
         try {
@@ -118,6 +141,10 @@ public class Database_test {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public static boolean reservationsTest() {
         String infop=" ";
         try {
@@ -140,7 +167,10 @@ public class Database_test {
         }
         return true;
     }
-
+    /**
+     *
+     * @return
+     */
     public static boolean UsersTest() {
         String infop=" ";
         try {
@@ -163,7 +193,13 @@ public class Database_test {
         }
         return true;
     }
-    // MichaelM; not quite sure where to put this shit
+
+
+
+    /**
+     *
+     * @return
+     */
     public static void addToDataBase() {
         Connection conn = null;
         Statement stmt = null;
@@ -221,6 +257,11 @@ public class Database_test {
         }//end try
 
     }
+
+    /**
+     *
+     * @return
+     */
     public static void removeFromDatabase(){
         Connection conn = null;
         Statement stmt = null;

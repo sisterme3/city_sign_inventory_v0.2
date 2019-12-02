@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 public class Database_Access extends Database_test{
 
+    /**
+     *
+     * @return
+     */
     public static String sign() {
         String infop = " ";
         if (Database_test.signTest()) {
@@ -28,6 +32,11 @@ public class Database_Access extends Database_test{
         }
         return infop;
     }
+
+    /**
+     *
+     * @return
+     */
     public static String customer() {
         String infop=" ";
         try {
@@ -49,6 +58,10 @@ public class Database_Access extends Database_test{
         return infop;
     }
 
+    /**
+     *
+     * @return
+     */
     public static String categories() {
         String infop=" ";
         try {
@@ -69,6 +82,10 @@ public class Database_Access extends Database_test{
         }
         return infop;
     }
+    /**
+     *
+     * @return
+     */
     public static String statuses() {
         String infop=" ";
         try {
@@ -89,6 +106,10 @@ public class Database_Access extends Database_test{
         }
         return infop;
     }
+    /**
+     *
+     * @return
+     */
     public static String reservations() {
         String infop=" ";
         try {
@@ -109,7 +130,10 @@ public class Database_Access extends Database_test{
         }
         return infop;
     }
-
+    /**
+     *
+     * @return
+     */
     public static String languages() {
         String infop=" ";
         try {
@@ -130,7 +154,10 @@ public class Database_Access extends Database_test{
         }
         return infop;
     }
-    //MichaelM Code
+    /**
+     *
+     * @return
+     */
     public static void addToDataBase(String name, String activity){
         Connection conn = null;
         Statement stmt = null;
