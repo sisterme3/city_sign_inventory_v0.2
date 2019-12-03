@@ -126,7 +126,6 @@ public class Scene_changer extends Database_Access {
         MenuItem m1 = new MenuItem("See Inventory");
         MenuItem m2 = new MenuItem("Add Signs");
         MenuItem m3 = new MenuItem("Reserve Signs");
-        MenuItem m4 = new MenuItem("Recommendation");
         MenuItem m5 = new MenuItem("Report a Problem");
         menu2.getItems().add(me1);
         menu2.getItems().add(me2);
@@ -134,7 +133,6 @@ public class Scene_changer extends Database_Access {
         menu1.getItems().add(m1);
         menu1.getItems().add(m2);
         menu1.getItems().add(m3);
-        menu1.getItems().add(m4);
         menu1.getItems().add(m5);
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().add(menu1);
