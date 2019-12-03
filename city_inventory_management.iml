@@ -20,5 +20,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="mysql-connector-java-5.1.48" level="project" />
+    <orderEntry type="library" exported="" name="lib" level="project" />
   </component>
 </module>

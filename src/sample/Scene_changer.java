@@ -78,8 +78,18 @@ public class Scene_changer extends Database_Access {
         login.setTranslateY(140);
         login.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
+                if(Database_Access.checkUser(Username.getText(),password.getText()))
+                    stage.setScene(MenuScene(name));
+                else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Dialog");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Username or password is incorrect.");
 
-                 stage.setScene(MenuScene(name));
+
+                    alert.showAndWait();
+                }
+
             }
         });
         root.getChildren().addAll(login,Username,password, userLabel, label, AdminButton);
@@ -787,6 +797,20 @@ public class Scene_changer extends Database_Access {
      *
      * @return
      */
+
+    protected Scene RegisterScene() {
+        VBox root = new VBox();
+        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(10, 0, 0, 10));
+        root.setSpacing(10);
+        root.setAlignment(Pos.CENTER);
+        Label userLabel = new Label("Heyyyy Mister/Madam Admin <3");
+        userLabel.setFont(new Font("Arial", 15));
+
+        root.getChildren().addAll(userLabel);
+        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+    }
 
     protected Scene AdminScene() {
         Menu menu1 = new Menu("Admin Actions");

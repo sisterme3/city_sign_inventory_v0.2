@@ -277,4 +277,42 @@ public class Database_Access extends Database_test{
         alert.showAndWait();
         return true;
     }
+
+    public static boolean checkUser(String username, String password) {
+        String query1 = "SELECT * FROM users WHERE users.Username LIKE '" + username + "'";
+
+        String[] infop = new String[4];
+        if (Database_test.signTest()) {
+            try {
+
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection(
+                        "jdbc:mysql://cleanearthsoftware.com:3306/4236paulgarlandclean_cims1",
+                        "cims_user1",
+                        "CSC4610-01");
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(query1);
+                while (rs.next()) {
+                    infop[0] = (Integer.toString(rs.getInt(1)));
+                    infop[1] = rs.getString(2);
+                    infop[2] = rs.getString(3);
+                    infop[3] = (Integer.toString(rs.getInt(4)));
+                }
+                con.close();
+                if(infop.length == 0)
+                    return false;
+                if(infop[2].equals(password))
+                    return true;
+                else
+                    return false;
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            return false;
+        }
+        return false;
+    }
+
+
+
 }
