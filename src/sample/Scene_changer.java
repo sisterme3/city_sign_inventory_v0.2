@@ -32,8 +32,7 @@ public class Scene_changer extends Database_Access {
     }
 
     /**
-     * Contains
-     *
+     * Contains a login scene with an admin button
      *
      * @return
      */
@@ -72,8 +71,6 @@ public class Scene_changer extends Database_Access {
             }
         });
 
-
-
         Button login = new Button("Enter");
         login.setTranslateY(140);
         login.setOnAction(new EventHandler<ActionEvent>() {
@@ -97,9 +94,9 @@ public class Scene_changer extends Database_Access {
     }
 
     /**
+     * Contains the inventory of the sign database.
      *
-     *
-     * @return
+     * @return Inventory scene
      */
     protected Scene InventoryScene() {
         Menu menu1 = new Menu("Actions");
@@ -192,9 +189,9 @@ public class Scene_changer extends Database_Access {
     }
 
     /**
+     * Contains the report scene to allow users to report problems
      *
-     *
-     * @return
+     * @return Report Scene
      */
     protected Scene ReportScene() {
         Menu menu1 = new Menu("Actions");
@@ -394,7 +391,7 @@ public class Scene_changer extends Database_Access {
     }
 
     /**
-     *
+     * Contains a reserve scene that allows customers to reserve signs
      * @return
      */
     protected Scene ReserveScene() {
@@ -500,6 +497,10 @@ public class Scene_changer extends Database_Access {
         return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
     }
 
+    /**
+     * Contains
+     * @return
+     */
     protected Scene RemoveScene() {
         Menu menu1 = new Menu("Actions");
         Menu menu2 = new Menu("Account Settings");
@@ -640,8 +641,6 @@ public class Scene_changer extends Database_Access {
         root1.getChildren().addAll(userLabel,menuBar);
         return new Scene(root1, screenBounds.getWidth(), screenBounds.getHeight());
     }
-
-
 
 
 
@@ -830,7 +829,7 @@ public class Scene_changer extends Database_Access {
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().add(menu1);
         menuBar.getMenus().add(menu2);
-        menuBar.setTranslateY(-300);
+        menuBar.setTranslateY(-365);
         menuBar.autosize();
 
         VBox root = new VBox(menuBar);
