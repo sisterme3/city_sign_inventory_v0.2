@@ -726,7 +726,6 @@ public class Scene_changer extends Database_Access {
         root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
         root.setAlignment(Pos.CENTER);
 
-
         Label userLabel = new Label("Please enter the new user name and new password of the user");
         userLabel.setFont(new Font("Arial", 30));
         userLabel.setTranslateY(-200);
@@ -734,17 +733,14 @@ public class Scene_changer extends Database_Access {
         TextField User = new TextField();
         TextField pass = new TextField();
 
-
         Button ChangeButton = new Button("Change User Login");
         ChangeButton.setTranslateY(200);
         ChangeButton.setTranslateX(-10);
 
-
-
         ChangeButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-
-                userLabel.setText("Login information has been sent to the specified User");
+               String name = User.getText();
+                userLabel.setText("Login information has been sent to " + name + "@CIM.com");
                 User.setText(" ");
                 pass.setText(" ");
             }
