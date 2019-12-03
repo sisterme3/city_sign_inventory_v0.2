@@ -15,12 +15,8 @@ import javafx.stage.Stage;
 
 
 /**
- *
- *
- *
- *
- *
- *
+ * This class contains the scenes for each scene within the
+ * City Sign Inventory Management System.
  */
 public class Scene_changer extends Database_Access {
     Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
@@ -28,36 +24,15 @@ public class Scene_changer extends Database_Access {
     String name =" ";
 
     /**
-     *
-     *
-     *
-     *
+     * Scene changer constructor.
+     * @param s A stage object that is the main stage for the application
      */
     public Scene_changer(Stage s){
         stage =s;
     }
 
-
     /**
-     *
-     * @param s
-     */
-    public void setname(String s){
-      name = s;
-    }
-
-    /**
-     *
-     * @return
-     */
-
-    public String getname(){
-        return name;
-    }
-
-    /**
-     *
-     *
+     * Contains
      *
      *
      * @return
@@ -77,7 +52,6 @@ public class Scene_changer extends Database_Access {
         label.setAlignment(Pos.CENTER);
         TextField Username = new TextField();
         Username.prefWidth(5);
-        setname(Username.getText());
         PasswordField password = new PasswordField();
         GridPane root1 = new GridPane();
         root1.addRow(0, Username);
@@ -516,13 +490,7 @@ public class Scene_changer extends Database_Access {
         return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
     }
 
-
-    /**
-     *
-     *
-     * @return
-     */
-    protected Scene AddScene() {
+    protected Scene RemoveScene() {
         Menu menu1 = new Menu("Actions");
         Menu menu2 = new Menu("Account Settings");
         MenuItem me1 = new MenuItem("Change Password");
@@ -532,6 +500,8 @@ public class Scene_changer extends Database_Access {
         MenuItem m2 = new MenuItem("Add Signs");
         MenuItem m3 = new MenuItem("Reserve Signs");
         MenuItem m5 = new MenuItem("Report a Problem");
+        MenuItem m6 = new MenuItem("Remove order");
+        menu1.getItems().add(m6);
         menu2.getItems().add(me1);
         menu2.getItems().add(me2);
         menu2.getItems().add(me3);
@@ -542,18 +512,60 @@ public class Scene_changer extends Database_Access {
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().add(menu1);
         menuBar.getMenus().add(menu2);
-        menuBar.setTranslateY(-375);
+        menuBar.setTranslateY(0);
         menuBar.setTranslateX(0);
         menuBar.autosize();
 
+//        VBox root = new VBox(menuBar);
+//        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+//        root.setAlignment(Pos.CENTER);
+//        root.setPadding(new Insets(10, 0, 0, 10));
+//        root.setSpacing(10);
+//        root.setAlignment(Pos.CENTER);
+//        Label userLabel = new Label("Hello");
+//        userLabel.setFont(new Font("Arial", 15));
         VBox root = new VBox(menuBar);
         root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(10, 0, 0, 10));
         root.setSpacing(10);
         root.setAlignment(Pos.CENTER);
-        Label userLabel = new Label("Hello");
+
+        Label userLabel = new Label("");
         userLabel.setFont(new Font("Arial", 15));
+        root.getChildren().addAll(userLabel);
+        Label nameName=new Label("What name is your order under?");
+
+        TextField tf1=new TextField();
+
+        Button b = new Button("Submit");
+        // This Dialog Box needs to go into the Database Access method but it's here until I find a way to refactor
+//        if(tf1.getText().isEmpty() || tf2.getText().isEmpty()){
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("Empty Fields!");
+//            alert.setHeaderText("Be sure to actually type something instead of trying to break our data base :^)");
+//            alert.setContentText("Appreciated!");
+//            alert.showAndWait();
+//        }
+        b.setOnAction(e-> removeFromDatabase(tf1.getText()));
+        GridPane root1 = new GridPane();
+        root1.addRow(0, nameName, tf1);
+        root1.addRow(2, b);
+        root1.setAlignment(Pos.BASELINE_LEFT);
+        root1.setPadding(new Insets(10, 20, 20, 10));
+        root1.setAlignment(Pos.CENTER_LEFT);
+        Button BackButton = new Button("Back to Main Menu");
+        BackButton.setTranslateY(100);
+        BackButton.setTranslateX(-100);
+
+
+        BackButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+
+                stage.setScene(MenuScene("sfds"));
+            }
+        });
+//        return new Scene(root1, screenBounds.getWidth(), screenBounds.getHeight());
 
 
         m1.setOnAction(new EventHandler<ActionEvent>() {
@@ -562,6 +574,7 @@ public class Scene_changer extends Database_Access {
                 stage.setScene(InventoryScene());
 
             }
+
         });
 
         m2.setOnAction(new EventHandler<ActionEvent>() {
@@ -608,9 +621,165 @@ public class Scene_changer extends Database_Access {
             }
         });
 
+        m6.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(RemoveScene());
+            }
+        });
+        root1.getChildren().addAll(userLabel,menuBar);
+        return new Scene(root1, screenBounds.getWidth(), screenBounds.getHeight());
+    }
 
+
+
+
+
+    /**
+     *
+     *
+     * @return
+     */
+    protected Scene AddScene() {
+        Menu menu1 = new Menu("Actions");
+        Menu menu2 = new Menu("Account Settings");
+        MenuItem me1 = new MenuItem("Change Password");
+        MenuItem me2 = new MenuItem("Change Account Settings");
+        MenuItem me3 = new MenuItem("Log out");
+        MenuItem m1 = new MenuItem("See Inventory");
+        MenuItem m2 = new MenuItem("Add Signs");
+        MenuItem m3 = new MenuItem("Reserve Signs");
+        MenuItem m5 = new MenuItem("Report a Problem");
+        MenuItem m6 = new MenuItem("Remove order");
+        menu1.getItems().add(m6);
+        menu2.getItems().add(me1);
+        menu2.getItems().add(me2);
+        menu2.getItems().add(me3);
+        menu1.getItems().add(m1);
+        menu1.getItems().add(m2);
+        menu1.getItems().add(m3);
+        menu1.getItems().add(m5);
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(menu1);
+        menuBar.getMenus().add(menu2);
+        menuBar.setTranslateY(-300);
+        menuBar.setTranslateX(0);
+        menuBar.autosize();
+
+//        VBox root = new VBox(menuBar);
+//        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+//        root.setAlignment(Pos.CENTER);
+//        root.setPadding(new Insets(10, 0, 0, 10));
+//        root.setSpacing(10);
+//        root.setAlignment(Pos.CENTER);
+//        Label userLabel = new Label("Hello");
+//        userLabel.setFont(new Font("Arial", 15));
+        VBox root = new VBox(menuBar);
+        root.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(10, 0, 0, 10));
+        root.setSpacing(10);
+        root.setAlignment(Pos.CENTER);
+
+        Label userLabel = new Label("");
+        userLabel.setFont(new Font("Arial", 15));
         root.getChildren().addAll(userLabel);
-        return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+        Label nameName=new Label("What's the Name of your Company/Organization?");
+        Label isActive = new Label("Are you active? 1 for Yes, 0 for No");
+        TextField tf1=new TextField();
+        TextField tf2=new TextField();
+        Button b = new Button("Submit");
+        // This Dialog Box needs to go into the Database Access method but it's here until I find a way to refactor
+        if(tf1.getText().isEmpty() || tf2.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Empty Fields!");
+            alert.setHeaderText("Be sure to actually type something instead of trying to break our data base :^)");
+            alert.setContentText("Appreciated!");
+            alert.showAndWait();
+        }
+        b.setOnAction(e-> addToDataBase(tf1.getText(),tf2.getText()));
+        GridPane root1 = new GridPane();
+        root1.addRow(0, nameName, tf1);
+        root1.addRow(1, isActive, tf2);
+        root1.addRow(2, b);
+        root1.setAlignment(Pos.BASELINE_LEFT);
+        root1.setPadding(new Insets(10, 20, 20, 10));
+        root1.setAlignment(Pos.CENTER_LEFT);
+        Button BackButton = new Button("Back to Main Menu");
+        BackButton.setTranslateY(100);
+        BackButton.setTranslateX(-100);
+
+
+        BackButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+
+                stage.setScene(MenuScene("dsfds"));
+            }
+        });
+//        return new Scene(root1, screenBounds.getWidth(), screenBounds.getHeight());
+
+
+        m1.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+
+                stage.setScene(InventoryScene());
+
+            }
+
+        });
+
+        m2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                stage.setScene(AddScene());
+            }
+        });
+
+        m3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(ReserveScene());
+            }
+        });
+
+
+        m5.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(ReportScene());
+            }
+        });
+
+        me1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+
+        me3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(logInScene());
+            }
+        });
+        m6.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                stage.setScene(RemoveScene());
+            }
+        });
+
+        root1.getChildren().addAll(userLabel,menuBar);
+        return new Scene(root1, screenBounds.getWidth(), screenBounds.getHeight());
     }
 
     /**
@@ -637,7 +806,7 @@ public class Scene_changer extends Database_Access {
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().add(menu1);
         menuBar.getMenus().add(menu2);
-        menuBar.setTranslateY(-365);
+        menuBar.setTranslateY(-300);
         menuBar.autosize();
 
         VBox root = new VBox(menuBar);

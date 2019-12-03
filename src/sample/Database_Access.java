@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.scene.control.Alert;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -212,5 +214,67 @@ public class Database_Access extends Database_test{
         }//end try
         System.out.println("Goodbye!");
 
+    }
+
+
+    public static boolean removeFromDatabase(String name){
+        Connection conn = null;
+        Statement stmt = null;
+
+        try{
+
+            Class.forName("com.mysql.jdbc.Driver");
+
+
+            System.out.println("Connecting to the selected database...");
+            conn = DriverManager.getConnection(
+                    "jdbc:mysql://cleanearthsoftware.com:3306/4236paulgarlandclean_cims1",
+                    "cims_user1",
+                    "CSC4610-01");
+            System.out.println("Connected database successfully...");
+
+            stmt = conn.createStatement();
+            String sql = " DELETE FROM Customers where name = ?";
+
+
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("");
+            alert.setHeaderText("Are you sure you want to remove " + name + " from the data base??");
+            alert.setContentText("Click the red X for yes, or yes for yes, or cancel for yes!");
+
+            alert.showAndWait();
+            preparedStatement.setString(1, name);
+            preparedStatement.executeUpdate();
+
+
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    conn.close();
+            }catch(SQLException se){
+            }// do nothing
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        //DIALOGUE BOX
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setTitle("");
+        alert.setHeaderText("Congratulations, " + name + "has been removed!!");
+        alert.setContentText("i hope you're not looking for a refund!");
+
+        alert.showAndWait();
+        return true;
     }
 }
