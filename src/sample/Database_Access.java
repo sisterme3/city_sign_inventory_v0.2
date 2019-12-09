@@ -3,6 +3,7 @@ package sample;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Database_Access extends Database_test{
@@ -13,6 +14,7 @@ public class Database_Access extends Database_test{
      */
     public static String sign() {
         String infop = " ";
+
         if (Database_test.signTest()) {
             try {
 
@@ -23,8 +25,10 @@ public class Database_Access extends Database_test{
                         "CSC4610-01");
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery("select * from signs");
+               // rs.getString(3);
                 while (rs.next())
-                    infop = rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6)+" " + rs.getString(7)+" " + rs.getInt(8)+" " + rs.getInt(9)+" " + rs.getString(10)+" " + rs.getString(11);
+                   infop=infop.concat(" \n"+ rs.getString(3));
+                //System.out.println(infop);
                 con.close();
                 return infop;
             } catch (Exception e) {

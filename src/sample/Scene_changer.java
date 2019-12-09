@@ -118,7 +118,7 @@ public class Scene_changer extends Database_Access {
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().add(menu1);
         menuBar.getMenus().add(menu2);
-        menuBar.setTranslateY(-375);
+        menuBar.setTranslateY(-230);
         menuBar.setTranslateX(-5);
         menuBar.autosize();
 
@@ -130,7 +130,8 @@ public class Scene_changer extends Database_Access {
         root.setAlignment(Pos.CENTER);
 
         Label userLabel = new Label(sign());
-        userLabel.setFont(new Font("Arial", 15));
+        userLabel.setFont(new Font("Arial", 35));
+
 
         m1.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
@@ -829,7 +830,7 @@ public class Scene_changer extends Database_Access {
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().add(menu1);
         menuBar.getMenus().add(menu2);
-        menuBar.setTranslateY(-365);
+        menuBar.setTranslateY(-400);
         menuBar.autosize();
 
         VBox root = new VBox(menuBar);
@@ -1014,7 +1015,7 @@ public class Scene_changer extends Database_Access {
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().add(menu1);
         menuBar.getMenus().add(menu2);
-        menuBar.setTranslateY(-365);
+        menuBar.setTranslateY(-400);
         menuBar.autosize();
 
         VBox root = new VBox(menuBar);
