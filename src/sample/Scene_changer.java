@@ -71,6 +71,18 @@ public class Scene_changer extends Database_Access {
             }
         });
 
+        Button RegisterButton = new Button("Don't have an account? Click here to register.");
+        AdminButton.setTranslateY(70);
+        AdminButton.setTranslateX(0);
+
+
+        RegisterButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+
+                stage.setScene(RegisterScene());
+            }
+        });
+
         Button login = new Button("Enter");
         login.setTranslateY(140);
         login.setOnAction(new EventHandler<ActionEvent>() {
@@ -89,7 +101,9 @@ public class Scene_changer extends Database_Access {
 
             }
         });
-        root.getChildren().addAll(login,Username,password, userLabel, label, AdminButton);
+
+
+        root.getChildren().addAll(login,Username,password, userLabel, label, AdminButton, RegisterButton);
         return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
     }
 
@@ -805,10 +819,47 @@ public class Scene_changer extends Database_Access {
         root.setPadding(new Insets(10, 0, 0, 10));
         root.setSpacing(10);
         root.setAlignment(Pos.CENTER);
-        Label userLabel = new Label("Heyyyy Mister/Madam Admin <3");
+        Label userLabel = new Label("Enter desired username and password.");
         userLabel.setFont(new Font("Arial", 15));
+        TextField Username = new TextField();
+        Username.prefWidth(5);
+        PasswordField password = new PasswordField();
+        GridPane root1 = new GridPane();
+        root1.addRow(0, Username);
+        root1.addRow(1, password);
+        root1.setAlignment(Pos.BASELINE_LEFT);
+        root1.setPadding(new Insets(10, 20, 20, 10));
+        root1.setAlignment(Pos.CENTER);
 
-        root.getChildren().addAll(userLabel);
+        Button login = new Button("Enter");
+        login.setTranslateY(140);
+        login.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+                String retString = Database_Access.checkNewUser(Username.getText(),password.getText());
+                if(retString.equals("Success!")) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Dialog");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Success! Account created.");
+
+
+                    alert.showAndWait();
+                    stage.setScene(MenuScene(name));
+                }
+                else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Dialog");
+                    alert.setHeaderText(null);
+                    alert.setContentText(retString);
+
+
+                    alert.showAndWait();
+                }
+
+            }
+        });
+
+        root.getChildren().addAll(userLabel,Username,password,login);
         return new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
     }
 

@@ -317,6 +317,46 @@ public class Database_Access extends Database_test{
         return false;
     }
 
+    public static String checkNewUser(String username, String password) {
+        if(username.length() < 1)
+            return "Please enter a username.";
+        if(password.length() < 1)
+            return "Please enter a password.";
+
+        String query1 = "SELECT * FROM users WHERE users.Username LIKE '" + username + "'";
+        String query2 = "SELECT * FROM users ORDER BY UserID ASC";
+
+
+        int newUserID;
+        if (Database_test.signTest()) {
+            try {
+
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection(
+                        "jdbc:mysql://cleanearthsoftware.com:3306/4236paulgarlandclean_cims1",
+                        "cims_user1",
+                        "CSC4610-01");
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(query1);
+                if(rs.last())
+                    return "Username already exists.";
+                ResultSet rs2 = stmt.executeQuery(query2);
+                rs2.last();
+                newUserID = (rs2.getInt(1)) + 1;
+                String query3 = "INSERT INTO users (UserID,Username,Password,Admin) VALUES (" + newUserID +
+                        ", '" + username +"', '" + password + "', 0);";
+
+                int retInt = stmt.executeUpdate(query3);
+                con.close();
+                return "Success!";
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            return "false";
+        }
+        return "false";
+    }
+
 
 
 }
